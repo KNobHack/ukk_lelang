@@ -19,8 +19,6 @@ class CreateAssetGenreTable extends Migration
 
             $table->foreign('asset_id')->references('id')->on('assets');
             $table->foreign('genre_id')->references('id')->on('genres');
-
-            $table->primary(['asset_id', 'genre_id']);
         });
     }
 
