@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'nama_lengkap', 'no_telp', 'is_admin'
+        'email', 'password', 'nama_lengkap', 'no_telp'
     ];
 
     /**
@@ -36,4 +36,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $attributes = [
+        'is_admin' => false
+    ];
+
+    public function assets()
+    {
+        return $this->hasMany('App\Assets');
+    }
 }

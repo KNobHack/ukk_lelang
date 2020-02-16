@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class genre extends Model
+class Genre extends Model
 {
-    //
+    public function assets()
+    {
+        return $this->belongsToMany('App\Asset');
+    }
 }
