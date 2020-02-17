@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ProfileController extends Controller
         // Hanya admin yang bisa melihat users
         if (Auth::user()->is_admin) {
             $users = User::all();
-            return view('profile.all', $users);
+            return view('users.index', ['user' => $users]);
         } else {
-            return redirect(url('/profile/' . Auth::user()->id));
+            return redirect(url('/u/' . Auth::user()->id));
         }
     }
 
@@ -55,7 +55,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        if (!Auth::user()->is_admin) {
+            $id = Auth::user()->id;
+        }
+        $user = User::find($id);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
@@ -66,7 +70,11 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->is_admin) {
+            $id = Auth::user()->id;
+        }
+        $user = User::find($id);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -78,7 +86,22 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'no_telp' => 'required'
+        ]);
+
+        if (!Auth::user()->is_admin) {
+            $id = Auth::user()->id;
+        }
+
+        User::where('id', $id)
+            ->update([
+                'nama_lengkap' => $request->nama_lengkap,
+                'no_telp' => $request->no_telp
+            ]);
+
+        return redirect(url('/u/' . $id));
     }
 
     /**
@@ -89,6 +112,10 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!Auth::user()->is_admin) {
+            $id = Auth::user()->id;
+        }
+        User::destroy($id);
+        redirect(url('/home'));
     }
 }
