@@ -18,7 +18,7 @@ class UserController extends Controller
         // Hanya admin yang bisa melihat users
         if (Auth::user()->is_admin) {
             $users = User::all();
-            return view('users.index', ['user' => $users]);
+            return view('user.index', ['users' => $users]);
         } else {
             return redirect(url('/u/' . Auth::user()->id));
         }
@@ -59,7 +59,7 @@ class UserController extends Controller
             $id = Auth::user()->id;
         }
         $user = User::find($id);
-        return view('users.show', ['user' => $user]);
+        return view('user.show', ['user' => $user]);
     }
 
     /**
@@ -74,7 +74,7 @@ class UserController extends Controller
             $id = Auth::user()->id;
         }
         $user = User::find($id);
-        return view('users.edit', ['user' => $user]);
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
