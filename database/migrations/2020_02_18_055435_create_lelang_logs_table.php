@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ModifyUsersSesuaiKebutuhan extends Migration
+class CreateLelangLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class ModifyUsersSesuaiKebutuhan extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'nama_lengkap');
-            $table->string('no_telp', 13)->after('name');
-            $table->boolean('is_admin')->after('no_telp');
+        Schema::create('lelang_logs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('user_id');
+            // $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class ModifyUsersSesuaiKebutuhan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('lelang_logs');
     }
 }

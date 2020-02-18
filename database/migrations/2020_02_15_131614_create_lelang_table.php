@@ -17,7 +17,10 @@ class CreateLelangTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('asset_id');
+            $table->integer('harga_awal');
+            $table->integer('harga_sekarang');
             $table->timestamps();
+            $table->boolean('status');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');

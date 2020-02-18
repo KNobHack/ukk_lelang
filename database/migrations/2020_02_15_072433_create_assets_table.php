@@ -17,7 +17,9 @@ class CreateAssetsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('identifier', 255);
+            $table->text('deskripsi');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
