@@ -22,9 +22,9 @@
                     </tbody>
                 </table>
 
-                <a href="{{ url('/u/' . $user->id) }}/edit" class="btn btn-success btn-block btn-sm mt-2">{{ __('user.edit_account') }}</a>
+                <a href="{{ url('/u/' . $user->id) }}/edit" class="btn btn-primary btn-block btn-sm mt-2">{{ __('user.edit_account') }}</a>
                 @if(!Auth::user()->is_admin)
-                    <a href="#" class="btn btn-warning btn-block btn-sm mt-2">{{ __('user.change_password') }}</a>
+                    <a href="#" class="btn btn-success btn-block btn-sm mt-2">{{ __('user.change_password') }}</a>
                 @endif
                 <form action="{{ url('/u/' . $user->id) }}">
                     @csrf
