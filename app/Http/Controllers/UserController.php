@@ -8,6 +8,12 @@ use App\User;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -87,8 +93,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_lengkap' => 'required',
-            'no_telp' => 'required'
+            'nama_lengkap' => 'required|max:255',
+            'no_telp' => 'required|digits_between:1,13'
         ]);
 
         if (!Auth::user()->is_admin) {
@@ -115,7 +121,8 @@ class UserController extends Controller
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
         }
+        Auth::logout();
         User::destroy($id);
-        redirect(url('/home'));
+        redirect(url('/'));
     }
 }

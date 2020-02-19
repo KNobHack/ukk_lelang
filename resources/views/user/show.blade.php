@@ -22,11 +22,15 @@
                     </tbody>
                 </table>
 
-                <a href="#" class="btn btn-success mt-2">{{ __('user.edit_account') }}</a>
+                <a href="{{ url('/u/' . $user->id) }}/edit" class="btn btn-success btn-block btn-sm mt-2">{{ __('user.edit_account') }}</a>
                 @if(!Auth::user()->is_admin)
-                    <a href="#" class="btn btn-warning mt-2">{{ __('user.change_password') }}</a>
+                    <a href="#" class="btn btn-warning btn-block btn-sm mt-2">{{ __('user.change_password') }}</a>
                 @endif
-                <a href="#" class="btn btn-danger mt-2">{{ __('user.delete_account') }}</a>
+                <form action="{{ url('/u/' . $user->id) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger btn-block btn-sm mt-2">{{ __('user.delete_account') }}</button>
+                </form>
             </div>
         </div>
     </div>
