@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">{{ __('user.edit_account') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-sm">{{ __('user.edit_account') }}</button>
                 </form>
             </div>
         </div>
