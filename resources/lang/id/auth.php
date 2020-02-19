@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'Data tidak cocok dengan database.',
-    'throttle' => 'Terlalu banyak percobaan login. Coba lagi dalam :seconds seconds.',
+    'throttle' => 'Terlalu banyak percobaan login. Coba lagi dalam :seconds detik.',
 
 ];

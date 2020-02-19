@@ -11,7 +11,7 @@
                         <h5 class="card-title">{{ __('user.table_title') }}</h5>
                         
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center">No.</th>
@@ -28,8 +28,7 @@
                                             @if(!$user->is_admin)
                                                 <a class="btn btn-success"><span class="text-white">Promote</span></a>
                                             @endif
-                                            <a class="btn btn-primary"><span class="text-white">Detail</span></a>
-                                            <a class="btn btn-secondary"><span class="text-white">Nonaktifkan</span></a>
+                                            <a class="btn btn-primary" href="/u/{{ $user->id }}"><span class="text-white">Detail</span></a>
                                         </td>
                                     </tr>
                                     @endforeach
