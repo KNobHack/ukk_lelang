@@ -16,7 +16,6 @@ class CreateLelangLogsTable extends Migration
         Schema::create('lelang_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->bigInteger('user_id');
             // $table->timestamps();
         });
     }
