@@ -120,9 +120,32 @@ class UserController extends Controller
     {
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
+            Auth::logout();
+            User::destroy($id);
+            return redirect(url('/'));
+        } else {
+            User::destroy($id);
+            return redirect(url('/u'));
         }
-        Auth::logout();
-        User::destroy($id);
-        redirect(url('/'));
+    }
+
+    public function promote($id)
+    {
+        if (Auth::user()->is_admin) {
+            User::where('id', $id)->update(['is_admin' => true]);
+            return redirect(url('/u'));
+        } else {
+            return redirect(url('/home'));
+        }
+    }
+
+    public function demote($id)
+    {
+        if (Auth::user()->is_admin) {
+            User::where('id', $id)->update(['is_admin' => false]);
+            return redirect(url('/u'));
+        } else {
+            return redirect(url('/home'));
+        }
     }
 }

@@ -20,3 +20,5 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/u', 'UserController');
+Route::get('/u/{u}/pro', 'UserController@promote');
+Route::get('/u/{u}/dem', 'UserController@demote');

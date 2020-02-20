@@ -26,9 +26,11 @@
                                         <td>{{ $user->nama_lengkap }}</td>
                                         <td class="text-right">
                                             @if(!$user->is_admin)
-                                                <a class="btn btn-success"><span class="text-white">Promote</span></a>
+                                                <a class="btn btn-success btn-sm" href="/u/{{ $user->id }}/pro"><span class="text-white">Promote</span></a>
+                                            @else
+                                                <a class="btn btn-secondary btn-sm" href="/u/{{ $user->id }}/dem"><span class="text-white">Demote</span></a>
                                             @endif
-                                            <a class="btn btn-primary" href="/u/{{ $user->id }}"><span class="text-white">Detail</span></a>
+                                            <a class="btn btn-primary btn-sm" href="/u/{{ $user->id }}"><span class="text-white">Detail</span></a>
                                         </td>
                                     </tr>
                                     @endforeach

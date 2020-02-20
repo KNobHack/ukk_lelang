@@ -26,7 +26,7 @@
                 @if(!Auth::user()->is_admin)
                     <a href="#" class="btn btn-success btn-block btn-sm mt-2">{{ __('user.change_password') }}</a>
                 @endif
-                <form action="{{ url('/u/' . $user->id) }}">
+                <form action="{{ url('/u/' . $user->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-block btn-sm mt-2">{{ __('user.delete_account') }}</button>
