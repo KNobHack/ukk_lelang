@@ -107,7 +107,7 @@ class UserController extends Controller
                 'no_telp' => $request->no_telp
             ]);
 
-        return redirect(url('/u/' . $id));
+        return redirect(url('/u/' . $id))->with('status', __('update_success', ['Data berhasil di update']));
     }
 
     /**
@@ -125,13 +125,13 @@ class UserController extends Controller
             return redirect(url('/'));
         } else {
             User::destroy($id);
-            return redirect(url('/u'));
+            return redirect(url('/u'))->with('status', __('delete_success', ['Akun berhasil di hapus']));
         }
     }
 
     public function promote($id)
     {
-        if (Auth::user()->is_admin) {
+        if (Auth::user()->is_admin && Auth::user()->id != $id) {
             User::where('id', $id)->update(['is_admin' => true]);
             return redirect(url('/u'));
         } else {
@@ -141,7 +141,7 @@ class UserController extends Controller
 
     public function demote($id)
     {
-        if (Auth::user()->is_admin) {
+        if (Auth::user()->is_admin && Auth::user()->id != $id) {
             User::where('id', $id)->update(['is_admin' => false]);
             return redirect(url('/u'));
         } else {
