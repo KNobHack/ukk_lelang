@@ -17,4 +17,9 @@ class Lelang extends Model
     {
         return $this->belongsTo('App\Asset');
     }
+
+    public function logs()
+    {
+        return $this->hasMany('App\Lelang_log');
+    }
 }

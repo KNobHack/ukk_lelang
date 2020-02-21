@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Lelang');
     }
+
+    public function lelang_logs()
+    {
+        return $this->hasMany('App\Lelang_log');
+    }
 }
