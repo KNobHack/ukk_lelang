@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Hanya admin yang bisa melihat users
+        // Admin only
         if (Auth::user()->is_admin) {
             $users = User::all();
             return view('user.index', ['users' => $users]);
@@ -61,6 +61,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // Only admin can show other account
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
         }
@@ -76,6 +77,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        // Only admin can edit other account
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
         }
@@ -97,6 +99,7 @@ class UserController extends Controller
             'no_telp' => 'required|digits_between:1,13'
         ]);
 
+        // Only admin can update other account
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
         }
@@ -118,11 +121,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        // Only admin can delete other account
         if (!Auth::user()->is_admin) {
             $id = Auth::user()->id;
             Auth::logout();
             User::destroy($id);
-            return redirect(url('/'));
+            return redirect(url('/'))->with('status', __('delete_success', ['Akun berhasil di hapus']));
         } else {
             User::destroy($id);
             return redirect(url('/u'))->with('status', __('delete_success', ['Akun berhasil di hapus']));
@@ -131,6 +135,7 @@ class UserController extends Controller
 
     public function promote($id)
     {
+        // Admin only & cant self promote
         if (Auth::user()->is_admin && Auth::user()->id != $id) {
             User::where('id', $id)->update(['is_admin' => true]);
             return redirect(url('/u'));
@@ -141,6 +146,7 @@ class UserController extends Controller
 
     public function demote($id)
     {
+        // Admin only & cant self demote
         if (Auth::user()->is_admin && Auth::user()->id != $id) {
             User::where('id', $id)->update(['is_admin' => false]);
             return redirect(url('/u'));
