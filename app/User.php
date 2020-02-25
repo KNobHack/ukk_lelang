@@ -38,7 +38,8 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'is_admin' => false
+        'is_admin' => false,
+        'is_banned' => false
     ];
 
     public function assets()
