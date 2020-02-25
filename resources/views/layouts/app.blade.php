@@ -34,12 +34,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/jual') }}">Jual</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/beli') }}">Beli</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/assets') }}">Assets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/l') }}">Ikut Lelang</a>
+                            </li>
+                            @if(Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/report') }}">Laporan</a>
+                                </li>
+                            @endif
                         @endauth
                     </ul>
 
