@@ -17,7 +17,6 @@ class ModifyUsersSesuaiKebutuhan extends Migration
             $table->renameColumn('name', 'nama_lengkap');
             $table->string('no_telp', 13)->after('name');
             $table->boolean('is_admin')->after('no_telp');
-            $table->boolean('is_banned')->after('no_telp');
         });
     }
 
