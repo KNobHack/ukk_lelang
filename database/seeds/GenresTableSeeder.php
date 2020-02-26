@@ -12,8 +12,19 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('genres')->insert([
-            'genre' => ''
+        $genres = collect([
+            'Action',
+            'Adventure',
+            'Role-playing',
+            'Simulation',
+            'Sports',
+            'Idle'
         ]);
+
+        foreach ($genres as $genre) {
+            DB::table('genres')->insert([
+                'genre' => $genre
+            ]);
+        }
     }
 }
