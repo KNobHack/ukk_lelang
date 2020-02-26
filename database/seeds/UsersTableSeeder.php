@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
             'is_banned' => 0,
             'email' => 'fahmi.kamilah@gmail.com',
             'password' => Hash::make('12345678'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
