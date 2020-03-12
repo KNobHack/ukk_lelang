@@ -23,7 +23,7 @@ class AssetController extends Controller
     public function index()
     {
         $assets = User::find(Auth::user()->id)->assets;
-        return view('asset.index', ['assets' => $assets]);
+        return view('asset.index', compact('assets'));
     }
 
     /**
@@ -45,6 +45,13 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'game' => 'required',
+            'identifier' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
         $asset = new Asset;
 
         $asset->user_id = Auth::user()->id;
@@ -62,7 +69,7 @@ class AssetController extends Controller
             }
         }
 
-        return redirect(url('/assets'));
+        return redirect(url('/assets'))->with('pesan', 'Berhasil membuat asset');
     }
 
     /**
@@ -111,6 +118,6 @@ class AssetController extends Controller
         $asset->genres()->detach();
         $asset->delete();
 
-        return redirect(url('/assets'));
+        return redirect(url('/assets'))->with('pesan', 'Berhasil menghapus asset');
     }
 }

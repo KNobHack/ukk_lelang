@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="deskripsi" class="col-md-3 col-form-label text-md-left">Genre</label>
+                    <label class="col-md-3 col-form-label text-md-left">Genre</label>
 
                     <div class="col-md-9">
                         @foreach($genres as $genre)
@@ -61,18 +61,10 @@
                         <div class="row">
                             @endif
                             <div class="col-6">
-
                                 <div class="form-check">
                                     <input id="{{ $genre->genre }}" name="{{ $genre->genre }}" value="{{ $genre->id }}" type="checkbox" class="form-check-input">
                                     <label for="{{ $genre->genre }}" class="form-check-label">{{ $genre->genre }}</label>
-
-                                    @error('deskripsi')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
-
                             </div>
 
                             @if($loop->iteration % 2 == 0)
@@ -81,7 +73,7 @@
 
                         @endforeach
 
-                        @if($genres % 2 != 0)
+                        @if($genres->count() % 2 != 0)
                     </div>
                     @endif
                 </div>
