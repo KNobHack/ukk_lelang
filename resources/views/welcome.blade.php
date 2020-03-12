@@ -102,7 +102,7 @@
                 {{ config('app.name', 'Laravel') }}
             </div>
 
-            <a href="https://github.com/KNobHack/ukk_lelang" class="greating"><span> Make with love </span><span> by </span><span> Fany Muhammad Fahmi Kamilah </span></a>
+            <a href="https://github.com/KNobHack/ukk_lelang" class="greating"><span> Made with love </span><span> by </span><span> Fany Muhammad Fahmi Kamilah </span></a>
         </div>
     </div>
 </body>
