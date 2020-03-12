@@ -80,13 +80,17 @@
                         @endif
 
                         @endforeach
-                    </div>
-                </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                        @if($genres % 2 != 0)
+                    </div>
+                    @endif
+                </div>
         </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
+</div>
 </div>
 
 @endsection

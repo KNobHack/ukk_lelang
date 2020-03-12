@@ -8,12 +8,12 @@
     <div class="row">
         @endif
 
-        <div class="col-3">
-            <div class="card">
+        <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12">
+            <div class="card mb-4">
                 <!-- <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> -->
                 <div class="card-body">
-                    <h5 class="card-title">{{ $asset->identifier }}</h5>
-                    <p class="card-text">{{ $asset->deskripsi }}</p>
+                    <h5 class="card-title">{{ $asset->deskripsi }}</h5>
+                    <p class="card-text">{{ $asset->identifier }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach($asset->genres as $genre)
@@ -36,5 +36,8 @@
     </div>
     @endif
     @endforeach
+    @if($assets->count() % 4 != 0)
+</div>
+@endif
 </div>
 @endsection
