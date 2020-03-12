@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Genre;
 
 class AssetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        $assets = User::find(Auth::user()->id)->assets;
+        return view('asset.index', ['assets' => $assets]);
     }
 
     /**
@@ -23,7 +33,8 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+        return view('asset.create', compact('genres'));
     }
 
     /**
@@ -34,7 +45,24 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asset = new Asset;
+
+        $asset->user_id = Auth::user()->id;
+        $asset->game = $request->game;
+        $asset->identifier = $request->identifier;
+        $asset->deskripsi = $request->deskripsi;
+
+        $asset->save();
+
+        // Relasi Asset dan genre
+        $genres = Genre::all();
+        foreach ($genres as $g) {
+            if (isset($request->all()[$g->genre])) {
+                $asset->genres()->attach($request->all()[$g->genre]);
+            }
+        }
+
+        return redirect(url('/assets'));
     }
 
     /**
@@ -79,6 +107,10 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $asset = Asset::find($id);
+        $asset->genres()->detach();
+        $asset->delete();
+
+        return redirect(url('/assets'));
     }
 }

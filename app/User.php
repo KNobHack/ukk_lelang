@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function assets()
     {
-        return $this->hasMany('App\Assets');
+        return $this->hasMany('App\Asset');
     }
 
     public function lelang()
