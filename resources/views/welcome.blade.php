@@ -63,6 +63,22 @@
             margin-bottom: 30px;
         }
 
+        .greating {
+            color: #636b6f;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        /* Mode mobile */
+        @media screen and (max-width: 600px) {
+            span {
+                display: block;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -86,9 +102,7 @@
                 {{ config('app.name', 'Laravel') }}
             </div>
 
-            <div class="links">
-                <a href="https://github.com/KNobHack/ukk_lelang">Make with love by Fany Muhammad Fahmi Kamilah</a>
-            </div>
+            <a href="https://github.com/KNobHack/ukk_lelang" class="greating"><span> Make with love </span><span> by </span><span> Fany Muhammad Fahmi Kamilah </span></a>
         </div>
     </div>
 </body>
