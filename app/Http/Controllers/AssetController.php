@@ -80,7 +80,9 @@ class AssetController extends Controller
      */
     public function show($id)
     {
-        //
+        $asset = Asset::find($id);
+
+        return view('asset.show');
     }
 
     /**
