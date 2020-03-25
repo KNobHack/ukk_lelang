@@ -110,16 +110,20 @@ to get the desired effect
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/home') }}" class="nav-link">Home</a>
                 </li>
+                @if(Auth::user()->is_admin)
+                <li class="nav-item  d-none d-sm-inline-block">
+                    <a class="nav-link" href="{{ url('/report') }}">Laporan</a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link" href="#" onclick="">Logout</a>
-                    <form style="display:none" action="{{ url('/logout') }}">
+                    <a class="nav-link" href="{{ url('/logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="post">
                         @csrf
-                        @method('delete')
-                        <button id="logout" type="submit"></button>
                     </form>
                 </li>
             </ul>
@@ -152,7 +156,7 @@ to get the desired effect
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
@@ -185,6 +189,29 @@ to get the desired effect
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-cart-plus"></i>
+                                <p>
+                                    Transaksi
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/lelang/' . Auth::user()->id) }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ikut lelang</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/assets') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Jual</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -221,7 +248,7 @@ to get the desired effect
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2020 <b>Fany Muhammad Fahmi Kamilah</b>.</strong>
+            <strong>Copyright &copy; 2020 <i>Fany Muhammad Fahmi Kamilah</i>.</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

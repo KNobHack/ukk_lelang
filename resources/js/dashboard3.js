@@ -1,4 +1,4 @@
-mix.js('resources/js/app.js', 'public/js');
+require('chart.js');
 
 $(function () {
     'use strict'
