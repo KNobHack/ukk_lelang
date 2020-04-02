@@ -45,11 +45,11 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'game' => 'required',
             'identifier' => 'required',
             'deskripsi' => 'required',
+            'genre' => 'required',
         ]);
 
         $asset = new Asset;
@@ -62,11 +62,8 @@ class AssetController extends Controller
         $asset->save();
 
         // Relasi Asset dan genre
-        $genres = Genre::all();
-        foreach ($genres as $g) {
-            if (isset($request->all()[$g->genre])) {
-                $asset->genres()->attach($request->all()[$g->genre]);
-            }
+        foreach ($request->genre as $genre) {
+            $asset->genres()->attach($genre);
         }
 
         return redirect(url('/assets'))->with('pesan', 'Berhasil membuat asset');

@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/fontawesome-free/css/all.css') }}" rel="stylesheet">
+    @yield('css-plugin')
     <link href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}" rel="stylesheet">
 
     <!-- Google Font: Source Sans Pro -->
@@ -185,6 +186,8 @@ to get the desired effect
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('js-plugin')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    @yield('js')
 </body>
 </html>

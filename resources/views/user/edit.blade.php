@@ -62,7 +62,8 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nama_lengkap">Nama Lengkap</label>
-                    <input type="text" value="@if(old('nama_lengkap')){{ old('nama_lengkap') }}@else{{ $user->nama_lengkap }}@endif" name="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" placeholder="Masukkan nama lengkap">
+                    {{-- @if(old('nama_lengkap')){{ old('nama_lengkap') }}@else{{ $user->nama_lengkap }}@endif --}}
+                    <input type="text" value="{{old('nama_lengkap') ?? $user->nama_lengkap}}" name="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" placeholder="Masukkan nama lengkap">
                     @error('nama_lengkap')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

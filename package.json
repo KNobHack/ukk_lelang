@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "admin-lte": "^3.0.2",
-        "chart.js": "^2.9.3"
+        "chart.js": "^2.9.3",
+        "select2": "^4.0.13"
     }
 }

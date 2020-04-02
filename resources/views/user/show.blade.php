@@ -51,7 +51,7 @@
                 <p>Akun yang sudah di hapus tidak bisa di pulihkan kembali&hellip;</p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Batal</button>
                 <form action="{{ url('/u/' . $user->id) }}" method="post">
                     @csrf
                     @method('delete')
