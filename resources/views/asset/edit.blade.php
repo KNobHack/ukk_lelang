@@ -4,13 +4,13 @@
 <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.css') }}">
 @endsection
 
-@section('content-header', 'Tambah asset')
+@section('content-header', 'Edit asset')
 
 @section('content')
 <div class="col-sm-6">
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">Tambah asset</h3>
+            <h3 class="card-title">Edit asset</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -18,11 +18,12 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ url('/assets') }}">
+            <form method="post" action="{{ url('/assets/'. $asset->id) }}">
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="game">Nama game</label>
-                    <input type="text" name="game" id="game" value="{{ old('game') }}" class="form-control @error('game') is-invalid @enderror" required autofocus>
+                    <input type="text" name="game" id="game" value="{{ old('game') ?? $asset->game }}" class="form-control @error('game') is-invalid @enderror" required autofocus>
                     @error('game')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -31,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label for="identifier">IGN</label>
-                    <input type="text" name="identifier" id="identifier" value="{{ old('identifier') }}" class="form-control @error('identifier') is-invalid @enderror" required>
+                    <input type="text" name="identifier" id="identifier" value="{{ old('identifier') ?? $asset->identifier }}" class="form-control @error('identifier') is-invalid @enderror" required>
                     @error('identifier')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -40,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="4">{{ old('deskripsi') }}</textarea>
+                    <textarea id="deskripsi" name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="4">{{ old('deskripsi') ?? $asset->deskripsi}}</textarea>
                     @error('deskripsi')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -50,16 +51,20 @@
                 <div class="form-group">
                     <label for="genre">Genre</label>
                     <select name="genre[]" id="genre" class="genres @error('genre') is-invalid @enderror" multiple=" multiple" data-placeholder="Pilih Genre" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                        @php
+                        <?php
                         // Refill old value of genres
                         if(old('genre')){
-                        foreach(old('genre') as $og){
-                        $old_genres[$og] = true;
+                            foreach(old('genre') as $og){
+                                $fill_genres[$og] = true;
+                            }
+                        } else {
+                            foreach($asset->genres as $og){
+                                $fill_genres[$og->id] = true;
+                            }
                         }
-                        }
-                        @endphp
+                        ?>
                         @foreach($genres as $genre)
-                        <option value="{{ $genre->id }}" @if(isset($old_genres[$genre->id])) selected @endif>{{ $genre->genre }}</option>
+                        <option value="{{ $genre->id }}" @if(isset($fill_genres[$genre->id])) selected @endif>{{ $genre->genre }}</option>
                         @endforeach
                     </select>
                     @error('genre')
