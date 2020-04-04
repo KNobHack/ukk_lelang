@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="genre">Genre</label>
-                    <select name="genre[]" id="genre" class="genres @error('genre') is-invalid @enderror" multiple=" multiple" data-placeholder="Pilih Genre" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                    <select name="genre[]" id="genre" class="genres @error('genre') is-invalid @enderror" multiple="multiple" data-placeholder="Pilih Genre" data-dropdown-css-class="select2-purple" style="width: 100%;">
                         <?php
                         // Refill old value of genres
                         if(old('genre')){
@@ -80,6 +80,7 @@
     </div>
     <!-- /.card -->
 </div>
+<a href="{{ url()->previous() }}" class="btn btn-secondary mb-2">Kembali</a>
 @endsection
 @section('js-plugin')
 <script src="{{ asset('vendor/select2/dist/js/select2.js') }}"></script>

@@ -68,16 +68,16 @@
                         <td class="project-state">
                             @if($asset->lelang)
                             @if($asset->lelang->status)
-                            <span class="badge badge-primary">Terjual</span>
+                            <span class="badge badge-success">Sedang di lelang</span>
                             @else
-                            <span class="badge badge-success">Dijual</span>
+                            <span class="badge badge-primary">Terjual</span>
                             @endif
                             @else
                             <span class="badge badge-danger">Belum dijual</span>
                             @endif
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm" href="#">
+                            <a class="btn btn-success btn-sm" href="{{ url('/lelang/create/' . $asset->id) }}">
                                 <i class="fas fa-shopping-cart"></i>Jual
                             </a>
                             <a class="btn btn-primary btn-sm" href="{{ url('/assets/' . $asset->id) }}">

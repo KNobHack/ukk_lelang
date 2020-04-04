@@ -64,5 +64,5 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
+<a href="{{ url()->previous() }}" class="btn btn-secondary mb-2">Kembali</a>
 @endsection

@@ -149,9 +149,11 @@ to get the desired effect
             </div>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            @hasSection('content-blank')
+            @yield('content-blank')
+            @else
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
@@ -168,6 +170,7 @@ to get the desired effect
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content -->
+            @endif
         </div>
         <!-- /.content-wrapper -->
 
