@@ -80,7 +80,7 @@
                             <a class="btn btn-success btn-sm" href="{{ url('/lelang/create/' . $asset->id) }}">
                                 <i class="fas fa-shopping-cart"></i>Jual
                             </a>
-                            <a class="btn btn-primary btn-sm" href="{{ url('/assets/' . $asset->id) }}">
+                            <a class="btn btn-primary btn-sm" href="{{ ($asset->lelang) ? url('/lelang/' . $asset->id) : url('/assets/' . $asset->id) }}">
                                 <i class="fas fa-info"></i>Detail
                             </a>
                             <a class="btn btn-info btn-sm" href="{{ url('/assets/' . $asset->id . '/edit') }}">
