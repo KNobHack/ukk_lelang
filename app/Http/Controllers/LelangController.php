@@ -21,7 +21,9 @@ class LelangController extends Controller
      */
     public function index()
     {
-        //
+        $lelang = Lelang::where(['status' => 1])->get();
+
+        return view('lelang.index', ['lelang' => $lelang]);
     }
 
     /**
@@ -73,9 +75,9 @@ class LelangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lelang $lelang)
     {
-        //
+        return view('lelang.show', ['lelang' => $lelang]);
     }
 
     /**
