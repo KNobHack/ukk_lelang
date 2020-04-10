@@ -21,7 +21,7 @@
                         <div class="info-box bg-light">
                             <div class="info-box-content">
                                 <span class="info-box-text text-center text-muted">Harga awal</span>
-                                <span class="info-box-number text-center text-muted mb-0">Rp. {{ $lelang->harga_awal }}</span>
+                                <span class="info-box-number text-center text-muted mb-0">Rp. {{ number_format($lelang->harga_awal, 2, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="info-box bg-light">
                             <div class="info-box-content">
                                 <span class="info-box-text text-center text-muted">Harga sekarang</span>
-                                <span class="info-box-number text-center text-muted mb-0">Rp. {{ $lelang->harga_sekarang }}</span>
+                                <span class="info-box-number text-center text-muted mb-0">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                 <i class="fas fa-exclamation bg-blue"></i>
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock"></i> {{ $lelang->created_at->format('H:i') }}</span>
-                                    <h3 class="timeline-header"><a href="{{ url('/u/' . $lelang->user->id) }}">{{ $lelang->user->nama_lengkap }}</a>Memulai Lelang</h3>
+                                    <h3 class="timeline-header"><a href="{{ url('/u/' . $lelang->user->id) }}">{{ $lelang->user->nama_lengkap }}</a> Memulai Lelang</h3>
                                     <div class="timeline-body">
                                         <img src="http://placehold.it/150x100" alt="...">
                                         <img src="http://placehold.it/150x100" alt="...">
@@ -167,7 +167,7 @@
                     <a href="{{ url('/assets/' . $lelang->asset->id . '/edit') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Edit</a>
                     <button href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-exclamation"></i>Akhiri lelang</button>
                     @else
-                    <a href="#" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Ikut lelang</a>
+                    <a href="{{ url('/lelang/' . $lelang->id . '/tawar') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Tawar</a>
                     @endif
                 </div>
             </div>

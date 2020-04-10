@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Auth::routes(['verify' => true]);
 
@@ -27,10 +25,12 @@ Route::get('/u/{u}/dem', 'UserController@demote')->name('u.demote');
 
 Route::resource('/assets', 'AssetController');
 
-Route::get('/lelang/create/{asset}', 'LelangController@create')->name('lelang.create');
-Route::post('/lelang/{asset}', 'LelangController@store')->name('lelang.store');
-Route::resource('/lelang', 'LelangController')->except([
-    'create', 'store'
+Route::get('lelang/create/{asset}', 'LelangController@create')->name('lelang.create');
+Route::post('lelang/{asset}', 'LelangController@store')->name('lelang.store');
+Route::get('/lelang/{lelang}/tawar', 'LelangController@tawar')->name('lelang.tawar');
+Route::delete('lelang/{lelang}', 'LelangController@akhiri')->name('lelang.akhiri');
+Route::resource('lelang', 'LelangController')->only([
+    'index', 'update', 'show'
 ]);
 
 Route::fallback('ErrorController@index');

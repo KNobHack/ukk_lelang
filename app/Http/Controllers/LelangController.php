@@ -72,7 +72,7 @@ class LelangController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Lelang  $lelang
      * @return \Illuminate\Http\Response
      */
     public function show(Lelang $lelang)
@@ -81,14 +81,14 @@ class LelangController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mulai menawar lelang
      *
-     * @param  int  $id
+     * @param  \App\Lelang  $lelang
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function tawar(Lelang $lelang)
     {
-        //
+        return view('lelang.tawar', ['lelang' => $lelang]);
     }
 
     /**
@@ -104,12 +104,12 @@ class LelangController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Akhiri lelang spesifik.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function akhiri($id)
     {
         //
     }
