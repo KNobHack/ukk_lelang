@@ -6,7 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lelang extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'lelang';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'waktu_berakhir',
+    ];
 
     public function user()
     {

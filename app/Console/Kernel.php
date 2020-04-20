@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Lelang;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,6 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // $schedule->call(function () {
+        //     Lelang::where('waktu_berakhir', '<=', now()->format('Y-m-d H:i:s'))->update(['status' => 0]);
+        // })->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
     }
@@ -35,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

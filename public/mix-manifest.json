@@ -1,4 +1,12 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/pages/asset/create.js": "/js/pages/asset/create.js",
+    "/js/pages/lelang/create.js": "/js/pages/lelang/create.js",
+    "/js/moment.js": "/js/moment.js",
+    "/js/jquery.inputmask.bundle.js": "/js/jquery.inputmask.bundle.js",
+    "/vendor/select2/dist/js/select2.js": "/vendor/select2/dist/js/select2.js",
+    "/vendor/daterangepicker/daterangepicker.js": "/vendor/daterangepicker/daterangepicker.js",
+    "/vendor/select2/dist/css/select2.css": "/vendor/select2/dist/css/select2.css",
+    "/vendor/daterangepicker/daterangepicker.css": "/vendor/daterangepicker/daterangepicker.css"
 }

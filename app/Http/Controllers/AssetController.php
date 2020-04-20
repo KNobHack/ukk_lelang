@@ -45,11 +45,11 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'game' => 'required',
             'identifier' => 'required',
             'deskripsi' => 'required',
+            'genre' => 'required',
         ]);
 
         $asset = new Asset;
@@ -62,11 +62,8 @@ class AssetController extends Controller
         $asset->save();
 
         // Relasi Asset dan genre
-        $genres = Genre::all();
-        foreach ($genres as $g) {
-            if (isset($request->all()[$g->genre])) {
-                $asset->genres()->attach($request->all()[$g->genre]);
-            }
+        foreach ($request->genre as $genre) {
+            $asset->genres()->attach($genre);
         }
 
         return redirect(url('/assets'))->with('pesan', 'Berhasil membuat asset');
@@ -78,9 +75,9 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Asset $asset)
     {
-        //
+        return view('asset.show', ['asset' => $asset]);
     }
 
     /**
@@ -91,7 +88,10 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asset = Asset::find($id);
+        $genres = Genre::all();
+
+        return view('asset.edit', ['asset' => $asset, 'genres' => $genres]);
     }
 
     /**
@@ -103,7 +103,28 @@ class AssetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'game' => 'required',
+            'identifier' => 'required',
+            'deskripsi' => 'required',
+            'genre' => 'required',
+        ]);
+
+        $asset = Asset::find($id);
+
+        $asset->game = $request->game;
+        $asset->identifier = $request->identifier;
+        $asset->deskripsi = $request->deskripsi;
+
+        $asset->save();
+
+        // Relasi Asset dan genre
+        $asset->genres()->detach();
+        foreach ($request->genre as $genre) {
+            $asset->genres()->attach($genre);
+        }
+
+        return redirect('/assets/' . $id);
     }
 
     /**
