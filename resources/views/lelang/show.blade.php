@@ -47,8 +47,11 @@
                         <div class="timeline">
                             <!-- timeline time label -->
                             <div class="time-label">
-                                <span class="bg-red">{{ $lelang->created_at->format('d M, Y') }}</span>
+                                <span class="bg-blue">{{ $lelang->created_at->format('d M, Y') }}</span>
                             </div>
+                            @php
+                            $time = $lelang->created_at->format('d M, Y')
+                            @endphp
                             <!-- /.timeline-label -->
                             <!-- timeline item -->
                             <div>
@@ -67,80 +70,39 @@
                             </div>
                             <!-- END timeline item -->
                             <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-user bg-green"></i>
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                                </div>
-                            </div>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-comments bg-yellow"></i>
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                                    <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                                    <div class="timeline-body">
-                                        Take me to your leader!
-                                        Switzerland is small and neutral!
-                                        We are more like Germany, ambitious and misunderstood!
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a class="btn btn-warning btn-sm">View comment</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END timeline item -->
-                            <!-- timeline time label -->
+                            @foreach($lelang->logs as $log)
+                            @if($time != $log->created_at->format('d M, Y'))
                             <div class="time-label">
-                                <span class="bg-green">3 Jan. 2014</span>
+                                <span class="bg-green">{{ $log->created_at->format('d M, Y') }}</span>
                             </div>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
+                            @endif
                             <div>
-                                <i class="fa fa-camera bg-purple"></i>
+                                <i class="fas fa-comments bg-green"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                                    <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                                    <div class="timeline-body">
-                                        <img src="http://placehold.it/150x100" alt="...">
-                                        <img src="http://placehold.it/150x100" alt="...">
-                                        <img src="http://placehold.it/150x100" alt="...">
-                                        <img src="http://placehold.it/150x100" alt="...">
-                                        <img src="http://placehold.it/150x100" alt="...">
-                                    </div>
+                                    <span class="time"><i class="fas fa-clock"></i>{{ $log->created_at->format('H:i') }}</span>
+                                    <h3 class="timeline-header no-border"><a href="{{ url('/u/' . $log->user->id) }}">{{ $log->user->nama_lengkap }}</a> Menawar seharga {{ $log->harga }}</h3>
                                 </div>
                             </div>
+                            @php
+                            $time = $log->created_at->format('d M, Y')
+                            @endphp
+                            @endforeach
                             <!-- END timeline item -->
                             <!-- timeline item -->
-                            <div>
-                                <i class="fas fa-video bg-maroon"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-
-                                    <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-
-                                    <div class="timeline-body">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" frameborder="0" allowfullscreen=""></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                                    </div>
-                                </div>
+                            @if(!$lelang->status)
+                            @if($time != $lelang->updated_at->format('d M, Y'))
+                            <div class="time-label">
+                                <span class="bg-red">{{ $log->created_at->format('d M, Y') }}</span>
                             </div>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
+                            @endif
                             <div>
                                 <i class="fas fa-exclamation bg-red"></i>
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i>{{ $lelang->waktu_berakhir->format('d M, Y') }}</span>
+                                    <span class="time"><i class="fas fa-clock"></i>{{ $lelang->updated_at->format('H:s') }}</span>
                                     <h3 class="timeline-header no-border"><a href="{{ url('/u/' . $lelang->user->id) }}">{{ $lelang->user->nama_lengkap }}</a> Mengakhiri lelang</h3>
                                 </div>
                             </div>
+                            @endif
                             <!-- END timeline item -->
                             <div>
                                 <i class="fas fa-clock bg-gray"></i>

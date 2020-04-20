@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\Lelang;
+use App\Lelang_log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,7 @@ class LelangController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Asset $assset
      * @return \Illuminate\Http\Response
      */
     public function create(Asset $asset)
@@ -45,6 +47,7 @@ class LelangController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Asset $asset
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Asset $asset)
@@ -95,12 +98,23 @@ class LelangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Lelang  $lelang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lelang $lelang)
     {
-        //
+        // Jangan lupa validasi
+
+        $lelang_log = new Lelang_log([
+            'user_id' => Auth::user()->id,
+            'harga' => $request->harga_tawaran,
+        ]);
+
+        $lelang->harga_sekarang = $request->harga_tawaran;
+        $lelang->save();
+        $lelang->logs()->save($lelang_log);
+
+        return redirect('/lelang/' . $lelang->id);
     }
 
     /**

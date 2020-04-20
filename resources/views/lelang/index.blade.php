@@ -33,9 +33,6 @@
                                 <a href="{{ url('/lelang/' . $lelang->id) }}" class="btn btn-sm btn-info">
                                     <i class="fas fa-info"></i> Detail
                                 </a>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> View Profile
-                                </a>
                             </div>
                         </div>
                     </div>
