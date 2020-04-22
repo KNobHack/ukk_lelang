@@ -6,7 +6,7 @@ jangan tanya kenapa saya menggunakan underscore pada nama project XD.
 
 ## Installasi
 
-Gunakan package manager [composer](https://getcomposer.org/) untuk menginstall.
+Gunakan package manager [composer](https://getcomposer.org/) untuk mendownload.
 
 ```bash
 composer create-project knobhack/ukk_lelang 
