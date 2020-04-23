@@ -39,7 +39,8 @@ class User extends Authenticatable
 
     protected $attributes = [
         'is_admin' => false,
-        'is_banned' => false
+        'is_banned' => false,
+        'image' => 'default.jpg',
     ];
 
     public function assets()
