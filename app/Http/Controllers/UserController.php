@@ -73,7 +73,8 @@ class UserController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required|max:255',
-            'no_telp' => 'required|digits_between:1,13'
+            'no_telp' => 'required|digits_between:1,13',
+            'profile' => 'image|max:2000',
         ]);
 
         // Only admin can update other account
@@ -84,8 +85,15 @@ class UserController extends Controller
         User::where('id', $id)
             ->update([
                 'nama_lengkap' => $request->nama_lengkap,
-                'no_telp' => $request->no_telp
+                'no_telp' => $request->no_telp,
+                'image' => 'avatar_' . $request->user()->id,
             ]);
+
+        // Simpan foto
+        $request->file('profile')->storeAs(
+            'public/profile',
+            'avatar_' . $request->user()->id
+        );
 
         return redirect(url('/u/' . $id))->with('status', __('update_success', ['Data berhasil di update']));
     }
