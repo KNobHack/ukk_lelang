@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'no_telp' => '0895636980792',
             'is_admin' => 1,
             'is_banned' => 0,
+            'image' => 'default.jpg',
             'email' => 'fahmi.kamilah@gmail.com',
             'password' => Hash::make('12345678'),
             'created_at' => now(),

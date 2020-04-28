@@ -39,7 +39,7 @@
                         <input type="file" name="profile" class="custom-file-input @error('profile') is-invalid @enderror" id="profile">
                         <label class="custom-file-label" for="profile">Pilih file</label>
                         @error('profile')
-                        <div class="invalid-feedback"><strong>{{ $message }}<strong></div>
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                         @enderror
                     </div>
                 </div>

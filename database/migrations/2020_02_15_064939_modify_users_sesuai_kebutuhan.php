@@ -16,6 +16,7 @@ class ModifyUsersSesuaiKebutuhan extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('name', 'nama_lengkap');
             $table->string('no_telp', 13)->after('name');
+            $table->string('image')->after('no_telp');
             $table->boolean('is_admin')->after('no_telp');
             $table->boolean('is_banned')->after('is_admin');
         });

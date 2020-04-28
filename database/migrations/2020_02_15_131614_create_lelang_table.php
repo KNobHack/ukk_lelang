@@ -19,7 +19,7 @@ class CreateLelangTable extends Migration
             $table->unsignedBigInteger('asset_id');
             $table->integer('harga_awal');
             $table->integer('harga_sekarang');
-            $table->dateTime('waktu_berakhir');
+            $table->date('waktu_berakhir');
             $table->timestamps();
             $table->boolean('status');
 

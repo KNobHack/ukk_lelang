@@ -59,7 +59,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Rp.</span>
                             </div>
-                            <input type="number" name="harga_awal" min="0" id="harga_awal" class="form-control" required>
+                            <input type="number" value="{{ old('harga_awal') }}" name="harga_awal" min="0" id="harga_awal" class="form-control  @error('harga_awal') is-invalid @enderror" required autofocus>
+                            @error('harga_awal')
+                            <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                            @enderror
                         </div>
                     </div>
 
@@ -70,7 +73,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input type="text" name="waktu_berakhir" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy HH:MM" data-mask>
+                            <input type="date" value="{{ old('waktu_berakhir') }}" name="waktu_berakhir" class="form-control @error('waktu_berakhir') is-invalid @enderror" required>
+                            @error('waktu_berakhir')
+                            <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                            @enderror
                         </div>
                         <!-- /.input group -->
                     </div>
@@ -90,13 +96,4 @@
     </div>
 </div>
 
-@endsection
-
-@section('js-plugin')
-<script src="{{ asset('js/moment.js') }}"></script>
-<script src="{{ asset('js/jquery.inputmask.bundle.js') }}"></script>
-@endsection
-
-@section('js')
-<script src="{{ asset('js/pages/lelang/create.js') }}"></script>
 @endsection
