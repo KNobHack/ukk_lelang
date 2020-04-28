@@ -66,7 +66,7 @@ class AssetController extends Controller
             $asset->genres()->attach($genre);
         }
 
-        return redirect(url('/assets'))->with('pesan', 'Berhasil membuat asset');
+        return redirect()->action('AssetController@index')->with('pesan', 'Berhasil membuat asset');
     }
 
     /**
@@ -86,9 +86,8 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Asset $asset)
     {
-        $asset = Asset::find($id);
         $genres = Genre::all();
 
         return view('asset.edit', ['asset' => $asset, 'genres' => $genres]);
@@ -101,7 +100,7 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Asset $asset)
     {
         $request->validate([
             'game' => 'required',
@@ -109,8 +108,6 @@ class AssetController extends Controller
             'deskripsi' => 'required',
             'genre' => 'required',
         ]);
-
-        $asset = Asset::find($id);
 
         $asset->game = $request->game;
         $asset->identifier = $request->identifier;
@@ -124,7 +121,7 @@ class AssetController extends Controller
             $asset->genres()->attach($genre);
         }
 
-        return redirect('/assets/' . $id);
+        return redirect()->action('AssetController@show', [$asset->id])->with('pesan', 'Asset berhasil di ubah');
     }
 
     /**
@@ -133,12 +130,11 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Asset $asset)
     {
-        $asset = Asset::find($id);
         $asset->genres()->detach();
         $asset->delete();
 
-        return redirect(url('/assets'))->with('pesan', 'Berhasil menghapus asset');
+        return redirect()->action('AssetController@index')->with('pesan', 'Berhasil menghapus asset');
     }
 }
