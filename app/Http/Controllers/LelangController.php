@@ -58,7 +58,10 @@ class LelangController extends Controller
             redirect()->route('assets.index');
         }
 
-        // Jangan lupa validasi
+        $request->validate([
+            'harga_awal' => 'required|integer|min:1',
+            'waktu_berakhir' => 'required|date|after:now',
+        ]);
 
         $lelang->user_id = Auth::user()->id;
         $lelang->asset_id = $asset->id;
@@ -103,7 +106,9 @@ class LelangController extends Controller
      */
     public function update(Request $request, Lelang $lelang)
     {
-        // Jangan lupa validasi
+        $request->validate([
+            'harga_tawaran' => 'required|integer|min:' . $lelang->harga_sekarang,
+        ]);
 
         $lelang_log = new Lelang_log([
             'user_id' => Auth::user()->id,
@@ -114,7 +119,7 @@ class LelangController extends Controller
         $lelang->save();
         $lelang->logs()->save($lelang_log);
 
-        return redirect('/lelang/' . $lelang->id);
+        return redirect()->action('LelangController@show', [$lelang->id]);
     }
 
     /**
