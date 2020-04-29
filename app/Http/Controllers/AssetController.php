@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Genre;
+use Illuminate\Support\Carbon;
 
 class AssetController extends Controller
 {
@@ -23,6 +24,20 @@ class AssetController extends Controller
     public function index()
     {
         $assets = User::find(Auth::user()->id)->assets;
+
+        // Menambahkan siswa_waktu untuk asset yang telah di lelang
+        $assets->map(function ($asset){
+            if ($asset->lelang) {
+                $a = $asset->lelang->waktu_berakhir->diffInMinutes(now()); // Perbedaan waktu berakhir dengan waktu sekarang
+                $b = $asset->lelang->waktu_berakhir->diffInMinutes($asset->lelang->created_at); // Perbedaan waktu berakhir dengan waktu di mulai
+                $asset->siswa_waktu_persen = ceil($a * 100 / $b);
+                $asset->siswa_waktu = $asset->lelang->waktu_berakhir->diffAsCarbonInterval(now());
+                return $asset;
+            } else {
+                return $asset->siswa_waktu = null;
+            }
+        });
+
         return view('asset.index', compact('assets'));
     }
 

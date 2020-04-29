@@ -92,7 +92,7 @@
 <div class="row mb-2">
     <div class="col-12">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
-        <a href="#" class="btn btn-success float-right" onclick="event.preventDefault();document.getElementById('form-harga').submit()">Create new Porject</a>
+        <a href="#" class="btn btn-success float-right" onclick="event.preventDefault();document.getElementById('form-harga').submit()">Jual sekarang</a>
     </div>
 </div>
 

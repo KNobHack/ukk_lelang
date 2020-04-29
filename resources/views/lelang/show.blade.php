@@ -126,10 +126,9 @@
                 </ul>
                 <div class="text-center mt-5 mb-3">
                     @if(Auth::user()->id == $lelang->user->id)
-                    <a href="{{ url('/assets/' . $lelang->asset->id . '/edit') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Edit</a>
-                    <button href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-exclamation"></i>Akhiri lelang</button>
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-exclamation"></i> Akhiri lelang</button>
                     @else
-                    <a href="{{ url('/lelang/' . $lelang->id . '/tawar') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Tawar</a>
+                    <a href="{{ url('/lelang/' . $lelang->id . '/tawar') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i> Tawar</a>
                     @endif
                 </div>
             </div>
@@ -138,4 +137,31 @@
     <!-- /.card-body -->
 </div>
 <!-- /.card -->
+
+<div class="modal fade" id="delete-account-modal">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title">Yakin ingin mengakhiri lelang?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Aksi mengakhiri lelang tidak bisa di urungkan&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Batal</button>
+                <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Akhiri</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @endsection

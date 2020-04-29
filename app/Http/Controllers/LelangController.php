@@ -128,8 +128,11 @@ class LelangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function akhiri($id)
+    public function akhiri(Lelang $lelang)
     {
-        //
+        $lelang->status = false;
+        $lelang->save();
+
+        return redirect()->action('AssetController@index');
     }
 }

@@ -52,13 +52,19 @@
                         </td>
                         <td class="project_progress">
                             @if($asset->lelang)
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
-                                </div>
-                            </div>
-                            <small>
-                                57% Complete
-                            </small>
+                                @if($asset->lelang->status)
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="{{ $asset->siswa_waktu_persen }}" aria-volumemin="0" aria-volumemax="100" style="width: {{ $asset->siswa_waktu_persen }}%">
+                                        </div>
+                                    </div>
+                                    <small>
+                                        Siswa waktu {{ $asset->siswa_waktu }}
+                                    </small>
+                                @else
+                                <small>
+                                    Lelang selesai
+                                </small>
+                                @endif
                             @else
                             <small>
                                 Belum di jual
@@ -67,27 +73,29 @@
                         </td>
                         <td class="project-state">
                             @if($asset->lelang)
-                            @if($asset->lelang->status)
-                            <span class="badge badge-success">Sedang di lelang</span>
+                                @if($asset->lelang->status)
+                                    <span class="badge badge-success">Sedang di lelang</span>
+                                @else
+                                    <span class="badge badge-primary">Terjual</span>
+                                @endif
                             @else
-                            <span class="badge badge-primary">Terjual</span>
-                            @endif
-                            @else
-                            <span class="badge badge-danger">Belum dijual</span>
+                                <span class="badge badge-danger">Belum dijual</span>
                             @endif
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm" href="{{ url('/lelang/create/' . $asset->id) }}">
-                                <i class="fas fa-shopping-cart"></i>Jual
-                            </a>
                             <a class="btn btn-primary btn-sm" href="{{ ($asset->lelang) ? url('/lelang/' . $asset->id) : url('/assets/' . $asset->id) }}">
-                                <i class="fas fa-info"></i>Detail
+                                <i class="fas fa-info"></i> Detail
                             </a>
-                            <a class="btn btn-info btn-sm" href="{{ url('/assets/' . $asset->id . '/edit') }}">
-                                <i class="fas fa-pencil-alt"></i>Edit
-                            </a>
+                            @if(!$asset->lelang)
+                                <a class="btn btn-success btn-sm" href="{{ url('/lelang/create/' . $asset->id) }}">
+                                    <i class="fas fa-shopping-cart"></i> Jual
+                                </a>
+                                <a class="btn btn-info btn-sm" href="{{ url('/assets/' . $asset->id . '/edit') }}">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                            @endif
                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-account-modal{{ $asset->id }}">
-                                <i class="fas fa-trash"></i>Hapus
+                                <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
                     </tr>
@@ -101,8 +109,8 @@
 <!-- /.card -->
 <a href="{{ url('/assets/create') }}" class="btn btn-success float-right">Tambah Asset</a>
 
-@foreach($assets as $asset)
 <!-- Lain kali jangan gini ngodingnya!!!, pake javascript dong. dasar aku -->
+@foreach($assets as $asset)
 <div class="modal fade" id="delete-account-modal{{ $asset->id }}">
     <div class="modal-dialog">
         <div class="modal-content ">
