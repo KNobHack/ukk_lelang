@@ -69,5 +69,7 @@ php artisan migrate --seed
 php artisan serve
 ```
 
+> Dummy email:dummy@example.com | pass:12345678 (admin)
+
 ## Contributing
 Pull requests di bolehkan dan di apresiasi :).
